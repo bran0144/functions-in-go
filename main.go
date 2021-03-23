@@ -16,6 +16,8 @@ func main() {
 	fmt.Printf("total of sum: %f\n", total)
 
 	sv := simplemath.NewSemanticVerion(1, 2, 3)
-
+	sv.IncrementMajor()
+	sv.IncrementMajor()
+	sv.IncrementMajor()
 	println(sv.String())
 }
