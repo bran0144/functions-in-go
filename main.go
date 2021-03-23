@@ -14,4 +14,8 @@ func main() {
 	}
 	total := simplemath.Sum(12.2, 14, 16, 22.4)
 	fmt.Printf("total of sum: %f\n", total)
+
+	sv := simplemath.NewSemanticVerion(1, 2, 3)
+
+	println(sv.String())
 }
