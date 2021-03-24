@@ -22,3 +22,11 @@ func Divide(p1, p2 float64) (answer float64, err error) {
 func Add(p1, p2 float64) float64 {
 	return p1 + p2
 }
+
+func Subtract(p1, p2 float64) float64 {
+	return p1 - p2
+}
+
+func Multiply(p1, p2 float64) float64 {
+	return p1 * p2
+}
