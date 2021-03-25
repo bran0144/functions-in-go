@@ -27,6 +27,10 @@ func ReadFullFile() error {
 	defer func() {
 		_ = r.Close()
 	}()
+
+	defer func() {
+		println("before for-loop")
+	}()
 	for {
 		value, err := r.Read([]byte("text that does nothing"))
 		if err == io.EOF {
@@ -37,6 +41,10 @@ func ReadFullFile() error {
 		}
 		println(value)
 	}
+
+	defer func() {
+		println("after for-loop")
+	}()
 	return nil
 }
 
