@@ -70,8 +70,8 @@ type SimpleReader struct {
 }
 
 func (br *SimpleReader) Read(p []byte) (n int, err error) {
-	if br.count > 3 {
-		return 0, io.EOF
+	if br.count == 2 {
+		panic("something catastropic")
 	}
 	br.count += 1
 	return br.count, nil
