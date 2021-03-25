@@ -17,10 +17,27 @@ const (
 )
 
 func main() {
-	ReadSomething()
+	if err := ReadFullFile(); err != nil {
+		println("somthing bad occurred")
+	}
 }
 
-func ReadSomething() error {
+func ReadFullFile() error {
+	var r io.Reader = &SimpleReader{}
+	for {
+		value, err := r.Read([]byte("text that does nothing"))
+		if err == io.EOF {
+			println("finished reading file")
+			break
+		} else if err != nil {
+			return err
+		}
+		println(value)
+	}
+	return nil
+}
+
+func ReadSomethingBad() error {
 	var r io.Reader = BadReader{errors.New("my nonsense reader")}
 	if _, err := r.Read([]byte("test something")); err != nil {
 		fmt.Printf("an error occurred %s", err)
@@ -35,6 +52,18 @@ type BadReader struct {
 
 func (br BadReader) Read(p []byte) (n int, err error) {
 	return -1, br.err
+}
+
+type SimpleReader struct {
+	count int
+}
+
+func (br *SimpleReader) Read(p []byte) (n int, err error) {
+	if br.count > 3 {
+		return 0, io.EOF
+	}
+	br.count += 1
+	return br.count, nil
 }
 
 func powerOfTwo() func() int64 {
